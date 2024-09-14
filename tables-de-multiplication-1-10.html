@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tables de Multiplication de 1 à 10</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const TableMultiplication = ({ multiplicateur }) => {
+            const lignes = [];
+            for (let i = 1; i <= 10; i++) {
+                lignes.push(
+                    <tr key={i} className="border-b border-purple-200">
+                        <td className="py-1 px-2 text-right">{i}</td>
+                        <td className="py-1 px-2 text-center">x</td>
+                        <td className="py-1 px-2 text-center">{multiplicateur}</td>
+                        <td className="py-1 px-2 text-center">=</td>
+                        <td className="py-1 px-2 text-left font-bold">{i * multiplicateur}</td>
+                    </tr>
+                );
+            }
+
+            return (
+                <div className="bg-white bg-opacity-90 p-4 rounded-lg shadow-md">
+                    <h3 className="text-lg font-bold mb-2 text-center text-purple-700">Table de {multiplicateur}</h3>
+                    <table className="border-collapse border border-purple-300 w-full">
+                        <tbody>{lignes}</tbody>
+                    </table>
+                </div>
+            );
+        };
+
+        const GrilleTablesMultiplication = () => {
+            const tables = [];
+            for (let i = 1; i <= 10; i++) {
+                tables.push(<TableMultiplication key={i} multiplicateur={i} />);
+            }
+
+            return (
+                <div className="relative min-h-screen bg-gradient-to-br from-purple-400 via-pink-500 to-red-500 p-8">
+                    <div className="absolute inset-0" style={{
+                        backgroundImage: `radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px)`,
+                        backgroundSize: '20px 20px'
+                    }}></div>
+                    <div className="relative z-10">
+                        <h2 className="text-3xl font-bold mb-6 text-center text-white">Tables de Multiplication de 1 à 10</h2>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+                            {tables}
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.render(<GrilleTablesMultiplication />, document.getElementById('root'));
+    </script>
+</body>
+</html>
